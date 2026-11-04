@@ -9,7 +9,7 @@ Environment knobs: DATASET=main|main-high-conf; CALLOUTS (card JSON) and STEM (o
 XL scales the bar labels; COUNTS=0 drops the count labels over the bars; ONLY=bars|cards writes just the
 chart or just the cards; POSTER=1 / GROUPED=1 are alternative poster layouts.
 
-Needs matplotlib, numpy, pillow, uharfbuzz and fonttools, and macOS's Apple Color Emoji font.
+Needs matplotlib, numpy, pillow, uharfbuzz and fonttools (the disclosure emojis use the closest colour emoji font on this OS; see figures/emoji.py).
 """
 import os
 from pathlib import Path
@@ -27,30 +27,8 @@ from matplotlib.patches import Rectangle
 from matplotlib.lines import Line2D
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from PIL import Image
-import uharfbuzz as hb
-from fontTools.ttLib import TTFont
 
-EMOJI_FONT_PATH = "/System/Library/Fonts/Apple Color Emoji.ttc"
-with open(EMOJI_FONT_PATH, "rb") as _f:
-    _HB_FACE = hb.Face(_f.read())
-_HB_FONT = hb.Font(_HB_FACE)
-_TT_FONT = TTFont(EMOJI_FONT_PATH, fontNumber=0)
-_SBIX_STRIKE = _TT_FONT["sbix"].strikes[160]
-
-
-def render_emoji(text):
-    """Shape `text` (handles skin-tone/ZWJ sequences via harfbuzz) and pull the
-    resulting glyph's color bitmap directly out of the font's sbix table."""
-    buf = hb.Buffer()
-    buf.add_str(text)
-    buf.guess_segment_properties()
-    hb.shape(_HB_FONT, buf)
-    gid = buf.glyph_infos[0].codepoint
-    glyph_name = _TT_FONT.getGlyphName(gid)
-    glyph = _SBIX_STRIKE.glyphs[glyph_name]
-    im = Image.open(io.BytesIO(glyph.imageData)).convert("RGBA")
-    bbox = im.getbbox()
-    return im.crop(bbox) if bbox else im
+from trilemma.figures.emoji import render_emoji  # closest colour emoji font on this OS
 
 
 EMOJI_MAN = render_emoji("\U0001F468\U0001F3FB")  # man, light skin tone (black hair)

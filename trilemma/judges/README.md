@@ -33,7 +33,7 @@ which renders prompts without making API calls.
 | Fig. 5 (per-seat matrices) | `figures.matrix --paper` (uses `figures.judged_data`, `figures.matrix_legend`) | — |
 
 Figures are written to `outputs/figures/`. The two figure scripts draw the disclosure icons from
-macOS's Apple Color Emoji font. They also need `matplotlib`, `numpy`, `pillow`, `fonttools`,
+the closest colour emoji font on this OS (`trilemma/figures/emoji.py`: Apple Color Emoji on macOS, as in the paper; Noto Color Emoji or Segoe UI Emoji elsewhere; `TRILEMMA_EMOJI_FONT` overrides). They also need `matplotlib`, `numpy`, `pillow`, `fonttools`,
 `uharfbuzz` and `pypdf`.
 
 ## Reproducing `main`
