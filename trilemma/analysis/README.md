@@ -30,3 +30,21 @@ Status as checked against the paper's rollouts and judge outputs on 2026-11-04:
 Inputs that are data, not code:
 - `data/disclosure_seat_spans.md`: the hand labels ([matt] / [unprep] / [no] / [?]) of every direct-disclosure span. Table 13 uses them for every seat except those in the five deepseek `main` reruns, which use the per-item judge's majority label.
 - `prompts/*.md`: the reconstructed LLM-read prompts. `discussed_dm_labels.md` is the paper's labeller prompt, with the file input/output replaced by inline JSON.
+
+## Recovered provenance (results labelled by Claude, not by a script)
+
+Some numbers in the paper came from Claude reading transcripts rather than from a script.
+`prompts/recovered/` documents each one from the original Claude Code sessions: the prompt
+it was given (verbatim, where one existed), how its inputs were selected, and where its
+labels live. Labels that survived only in notes or transcripts are in `data/recovered/`.
+
+| paper | how it was labelled | prompt | labels | reproduces |
+|---|---|---|---|---|
+| Tab 12 (honeypot reasoning) | `judges.honeypot_reason`, `claude -p` with claude-sonnet-5 | yes (= shipped prompt) | yes (original verdicts) | exact, every row |
+| Baseline "asks George to move", 58 of 62 | main session read every Alice-George DM, dumped by a script | no prompt; dump script in `B_baseline_george.md` | `data/recovered/B_baseline_george.json` | exact, incl. per model |
+| Tab 16 categories | one Sonnet 5.5 subagent per run + codebook | yes (`C_qpq_categories.md`) | yes (41 run files) | exact (24/23/20/9/5) |
+| Tab 25 (eval awareness) | shipped gpt-5.6-sol judges + an aggregator + 3 approved overrides | aggregator in `D_evalaware_aggregation.md` | overrides in `data/recovered/` | exact |
+| Tab 17/18 DM labels | Sonnet 5, batches of ~150 DMs | yes, word for word = `prompts/discussed_dm_labels.md` | no (aggregates only) | rerun needed |
+| Tab 28/29 pool | 88 glm-5.3-flash runs, `sets/unseeded-coop-pool.tsv` | R1-R4 chosen by hand after an in-context read | pool exact; R1-R4 in it | pool exact |
+| Tab 27 asked/answer | in-context read (Sep 14-15) | no | aggregates only | rerun needed (`emily.py --judge`) |
+| Superbad never pushes / asks once / holds | in-context read (Sep 15) | no | `data/recovered/H_superbad_reasoning.json` | exact (3/3/2); reference for `dislike_reasons_read.py` |

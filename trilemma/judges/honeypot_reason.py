@@ -150,7 +150,7 @@ def main() -> None:
     ap.add_argument("--setting", default="honeypot")
     ap.add_argument("--critic", default=str(PROMPTS / "honeypot_reason.md"))
     ap.add_argument("--out", default=None, help="default outputs/judges/honeypot_reason/<setting>")
-    ap.add_argument("--model", default="claude-sonnet-5-5", help="claude -p model")
+    ap.add_argument("--model", default="claude-sonnet-5", help="claude -p model (paper: claude-sonnet-5)")
     ap.add_argument("--api", default=None, help="provider:model — use the API instead of claude -p")
     ap.add_argument("--workers", type=int, default=3)
     ap.add_argument("--dry-run", action="store_true", help="write the rendered prompts and stop")

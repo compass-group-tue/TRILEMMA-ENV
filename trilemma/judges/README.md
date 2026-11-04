@@ -24,7 +24,7 @@ which renders prompts without making API calls.
 | Motivated reasoning: Fig. 3, 6, 7, Table 8 | `judges.fabrication --kind MR-A --prefilter-ack outputs/judges/deception/<setting>` (replicates 1-3) → `judges.motivated_reasoning_report` | `openai/gpt-6.1-sol`, 3 replicates |
 | Honeypot run sets (70 / 62 runs) | `judges.honeypot_operative` (deterministic; the frozen sets are `sets/honeypot.txt`, `sets/no-avoidance-baseline.txt`) | none |
 | Honeypot verdicts: Fig. 4a, Fig. 8, results paragraph | `judges.honeypot_bundle` → `judges.honeypot` → `trilemma.analysis.honeypot_fig4a` | `openai/gpt-5.6-terra`, reasoning effort medium |
-| Reasoning behind the excuse (Table 12) | `judges.honeypot_reason` | Claude Sonnet 5.5 via `claude -p` (or `--api openrouter:…`) |
+| Reasoning behind the excuse (Table 12) | `judges.honeypot_reason` | claude-sonnet-5 via `claude -p` (or `--api openrouter:…`) |
 | Quid pro quo (Table 16) | `judges.cooperation` (offers), then the category audit with `judges.qpq_tool` + `prompts/qpq_reasoning.md` (Claude agents) | `openai/gpt-5.6-terra`; categories: Claude Sonnet 5.5 / Opus 5.5 agents |
 | Detection of others' deception (Table 19, results paragraph) | `judges.detection --variant reasoning` | `openai/gpt-5.6-luna`, free routing |
 | Bob's agent (Tables 21-23) | `judges.bob_scan` (LLM), `judges.bob_scan_keywords`, `judges.bob_scan_keywords2` (keyword rows) | `anthropic/claude-sonnet-5` |
