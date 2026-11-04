@@ -1,0 +1,67 @@
+# Model registry: the paper's model names -> what a config sends.
+#
+# `model` is the OpenRouter id. `defaults` are the run-control values every setting starts
+# from for that model (a setting or a per-model override in settings.yaml can change them).
+# Keys besides `model` and `defaults` are copied into every config for that model.
+#
+# Provider notes (how the paper's runs were served, and what this release does instead):
+# - Open-weight models ran on OpenRouter, several pinned to one host. Pins that only routed
+#   around outages are not carried over: the router chooses.
+# - The pins that DID change behaviour are replaced by an explicit `reasoning_enabled`
+#   (OpenRouter `reasoning.enabled`), because some hosts serve hybrid models with thinking
+#   off unless asked:
+#     kimi-k2.6       `main` ran on a host that returns chain of thought (reasoning on);
+#                     every other setting ran on one that returns none (reasoning off).
+#                     The per-setting value is in settings.yaml.
+#     deepseek-v4-pro reasoned in the paper's runs (reasoning on). The
+#                     `main-high-conf-honest` deepseek-v4-pro runs, excluded from the paper, did not.
+#   Whether a given host honours `reasoning.enabled: false` for kimi-k2.6 is not
+#   something this release has verified; to match the paper's no-CoT kimi runs exactly,
+#   check `reasoning_tokens` in the first proxy_dump.jsonl lines of a run.
+# - gpt-5.5 ran through an institute gateway to Azure (temperature fixed at 1, no
+#   reasoning returned). Here it goes through OpenRouter (`openai/gpt-5.5`), which may
+#   return reasoning summaries the original runs did not have.
+# - claude-opus-5 and claude-sonnet-5 keep `anthropic/fast` excluded (a price tier, not
+#   a different model). The two `main-high-conf` claude-opus-5 runs were driven through the
+#   Claude Code CLI in the paper; here they use the same OpenRouter route as every other
+#   claude-opus-5 run.
+
+deepseek-v4-flash-0731:
+  model: deepseek/deepseek-v4-flash-0731
+  defaults: {temperature: 0.7, turn_timeout: 600, max_turns: 200, max_wall_seconds: 7200}
+deepseek-v4-pro-0813:
+  model: deepseek/deepseek-v4-pro-0813
+  reasoning_enabled: true
+  defaults: {temperature: 0.7, turn_timeout: 600, max_turns: 200, max_wall_seconds: 7200}
+glm-5.2:
+  model: z-ai/glm-5.2
+  defaults: {temperature: 0.7, turn_timeout: 600, max_turns: 200, max_wall_seconds: 7200}
+glm-5.3:
+  model: z-ai/glm-5.3
+  defaults: {temperature: 0.7, turn_timeout: 600, max_turns: 200, max_wall_seconds: 7200}
+glm-5.3-flash:
+  model: z-ai/glm-5.3-flash
+  defaults: {temperature: 0.7, turn_timeout: 600, max_turns: 200, max_wall_seconds: 7200}
+kimi-k2.6:
+  model: moonshotai/kimi-k2.6
+  defaults: {temperature: 0.7, turn_timeout: 600, max_turns: 200, max_wall_seconds: 7200}
+kimi-k3:
+  model: moonshotai/kimi-k3
+  defaults: {temperature: 0.7, turn_timeout: 600, max_turns: 200, max_wall_seconds: 7200}
+qwen3.8-flash:
+  model: qwen/qwen3.8-flash
+  defaults: {temperature: 0.7, turn_timeout: 240, max_turns: 300, max_wall_seconds: 10800}
+gpt-5.5:
+  model: openai/gpt-5.5
+  defaults: {temperature: 1.0, turn_timeout: 1200, max_turns: 200, max_wall_seconds: 7200}
+gpt-5.6-sol:
+  model: openai/gpt-5.6-sol
+  defaults: {temperature: 0.7, turn_timeout: 1800, max_turns: 200, max_wall_seconds: 7200}
+claude-opus-5:
+  model: anthropic/claude-opus-5
+  ignore_providers: anthropic/fast
+  defaults: {temperature: 0.7, turn_timeout: 1200, max_turns: 200, max_wall_seconds: 7200}
+claude-sonnet-5:
+  model: anthropic/claude-sonnet-5
+  ignore_providers: anthropic/fast
+  defaults: {temperature: 0.7, turn_timeout: 1200, max_turns: 200, max_wall_seconds: 7200}

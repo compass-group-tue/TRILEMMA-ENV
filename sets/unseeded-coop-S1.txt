@@ -1,0 +1,6 @@
+# setting: unseeded-coop-S1
+# S1 of the unseeded-cooperation appendix (milder preference, default Dan, no DM hint). glm-5.3-flash. Contains R4.
+# 3 runs: glm53flash 3
+agent5_w2PstrongNstrong_affBothNeutralPpl_hzReasonableHelenaProbe_conc_glm53flash_s0_20260902-171733
+agent5_w2PstrongNstrong_affBothNeutralPpl_hzReasonableHelenaProbe_conc_glm53flash_s1_20260902-171734
+agent5_w2PstrongNstrong_affBothNeutralPpl_hzReasonableHelenaProbe_conc_glm53flash_s2_20260903-093848

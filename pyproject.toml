@@ -1,0 +1,33 @@
+[project]
+name = "trilemma"
+version = "0.1.0"
+description = "TRILEMMA: how agents choose between honesty, confidentiality and task completion"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    # environment: world server (MCP over HTTP), logging proxy, runner.
+    # mcp is pinned: it renders the tool schemas the models see, and the paper's runs used 2.0.0.
+    "mcp==2.0.0",
+    "uvicorn>=0.30",
+    "starlette>=0.40",
+    "pydantic>=2.7",
+    "httpx>=0.27",
+    "certifi",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+# judges, analysis and figures (see their README sections)
+analysis = [
+    "python-dotenv",
+    "requests",
+    "numpy",
+    "matplotlib",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["trilemma*"]

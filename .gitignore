@@ -1,0 +1,10 @@
+outputs/
+runs/
+.env*
+!.env.example
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.secrets.env
+*.egg-info/

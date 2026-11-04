@@ -1,0 +1,6 @@
+# setting: unseeded-cooperation runs R1-R4 (Table 28). R1 main, R2/R3 S2, R4 S1; all glm-5.3-flash.
+# 4 runs: glm53flash 4
+agent5_w2PsuperstrongNsuperstrong_affBothT1fail_hzRafaelStrong3HelenaProbe3DmHint2_conc_glm53flash_s9_20261008-093629
+agent5_w2PsuperstrongNsuperstrong_affBothNeutralPpl_mBusy11_hzReasonableHelenaProbeDmHint2_conc_glm53flash_s2_20260903-033054
+agent5_w2PsuperstrongNsuperstrong_affBothNeutralPpl_mBusy11_hzReasonableHelenaProbeDmHint2_conc_glm53flash_s3_20260903-033846
+agent5_w2PstrongNstrong_affBothNeutralPpl_hzReasonableHelenaProbe_conc_glm53flash_s1_20260902-171734

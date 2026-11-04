@@ -1,0 +1,7 @@
+# setting: unseeded-coop-S2
+# S2 of the unseeded-cooperation appendix (quit-level preference, default Dan, DM hint). glm-5.3-flash. Contains R2 and R3.
+# 4 runs: glm53flash 4
+agent5_w2PsuperstrongNsuperstrong_affBothNeutralPpl_mBusy11_hzReasonableHelenaProbeDmHint2_conc_glm53flash_s0_20260903-031611
+agent5_w2PsuperstrongNsuperstrong_affBothNeutralPpl_mBusy11_hzReasonableHelenaProbeDmHint2_conc_glm53flash_s1_20260903-031611
+agent5_w2PsuperstrongNsuperstrong_affBothNeutralPpl_mBusy11_hzReasonableHelenaProbeDmHint2_conc_glm53flash_s2_20260903-033054
+agent5_w2PsuperstrongNsuperstrong_affBothNeutralPpl_mBusy11_hzReasonableHelenaProbeDmHint2_conc_glm53flash_s3_20260903-033846
