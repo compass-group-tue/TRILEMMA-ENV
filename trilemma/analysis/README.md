@@ -16,7 +16,7 @@ Status as checked against the paper's rollouts and judge outputs on 2026-11-04:
 | all settings | frozen run lists | `build_sets.py` (+ `honeypot_select.py`) | scripted | exact: every run count in the paper (main 90+8, main-high-conf 80/82/50, no-conf 24, honest 30, honeypot 70, no-avoidance-baseline 62, dislike-* 4×8, emily-available 80, discussed-avoidance 304) |
 | Tab 2 / Fig 5, T1 columns | who holds T1 at the end | `t1_claims.py` | scripted | exact for main-high-conf. For main, every count matches; the deepseek row in `findings/t1-claims-5e10.md` has 9 cells, so its incomplete markers are shifted by one seed |
 | Tab 3-7, 11, 12, 14, 15, 18, 29 | example rows (quotes) | `example_quotes.py` | scripted (locates each quote) | 63 of 64 quotes found verbatim. The miss is a paper error: Tab 15's glm-5.3-flash quote ("Carol wrote it to **Emily**", `main-no-conf` s7) reads "Nadia wrote it to **Zofia**", which is Fiona, not Emily |
-| Tab 13 (`tab:disc-ladder`) | disclosure at three confidentiality levels | `disclosure_ladder.py` (+ `data/disclosure_seat_spans.md`) | scripted over judge rows | exact, all 36 cells |
+| Tab 13 (`tab:disc-ladder`) | disclosure at three confidentiality levels | `disclosure_ladder.py` (+ `data/disclosure_seat_spans.md`) | scripted over judge rows + hand relabels | exact, all 36 cells (draft of 2026-11-05) |
 | Fig 4a | honeypot "fixed reason" x/10 per model | `honeypot_fig4a.py` | scripted over hp4 verdicts | exact (8, 6, 5, 4, 2, 2, 1). The figure's "raised otherwise" / "never raised" split is our reading of its legend and has no numbers in the paper to check against |
 | Fig 8 (heatmap) | hp4 gates per model | `honeypot_fig4a.py --heatmap` | scripted | exact: every non-zero cell of all 7 rows |
 | Tab 17 / 30 / 31 and the funnel text | discussed-avoidance groups 1 / 2 | `discussed_funnel.py` | scripted | exact: 304 / 158 / 105 / 55, by setting and by model |
@@ -29,6 +29,7 @@ Status as checked against the paper's rollouts and judge outputs on 2026-11-04:
 
 Inputs that are data, not code:
 - `data/disclosure_seat_spans.md`: the hand labels ([matt] / [unprep] / [no] / [?]) of every direct-disclosure span. Table 13 uses them for every seat except those in the five deepseek `main` reruns, which use the per-item judge's majority label.
+- `data/disclosure_ladder_relabels.tsv`: four seats the screening judge called `direct` that hand review found not to disclose anything (two `main-high-conf` deepseek seats, two deepseek rerun seats whose per-item label is `none`); Table 13 counts them as not disclosing.
 - `prompts/*.md`: the reconstructed LLM-read prompts. `discussed_dm_labels.md` is the paper's labeller prompt, with the file input/output replaced by inline JSON.
 
 ## Recovered provenance (results labelled by Claude, not by a script)

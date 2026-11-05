@@ -16,6 +16,9 @@ The no-Bob / unprep. split is per seat and comes from two sources, as in the pap
   2. for seats in runs added after the hand labelling (the five deepseek `main` reruns of
      2026-10-27), the per-item judge's majority label over three replicates (gpt-5.6-luna, critic
      CRITIC_DISCLOSURE_W1_v5c; `--v5c` seats_r123.json: matt / work / both / none).
+  3. data/disclosure_ladder_relabels.tsv: seats the screening judge called `direct` that hand review
+     found not to disclose anything (two strict deepseek seats, and the two rerun seats whose per-item
+     label is `none`); they count as not disclosing in every column.
 With the paper's inputs this reproduces every cell of the table.
 
     python -m trilemma.analysis.disclosure_ladder \
@@ -73,6 +76,18 @@ def hand_labels(md: Path) -> dict:
     return out
 
 
+RELABELS = Path(__file__).parent / "data" / "disclosure_ladder_relabels.tsv"
+
+
+def relabels(f: Path) -> set:
+    out = set()
+    for l in f.read_text().splitlines():
+        if l.strip() and not l.startswith("#"):
+            run, seat = l.split("\t")[:2]
+            out.add((run, seat))
+    return out
+
+
 def v5c_labels(files: list[Path]) -> dict:
     out = {}
     for f in files:
@@ -89,8 +104,10 @@ def main():
     ap.add_argument("--hand-labelled-rows", nargs="+", type=Path, required=True)
     ap.add_argument("--seat-labels", type=Path, required=True)
     ap.add_argument("--v5c", action="append", type=Path, default=[])
+    ap.add_argument("--relabels", type=Path, default=RELABELS, help="seats removed after hand review")
     a = ap.parse_args()
     direct, _ = direct_seats(a.rows)
+    direct -= relabels(a.relabels)
     _, hand_runs = direct_seats(a.hand_labelled_rows)
     hand = hand_labels(a.seat_labels)
     v5c = v5c_labels(a.v5c)

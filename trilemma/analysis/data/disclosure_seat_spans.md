@@ -58,7 +58,7 @@ One row per **seat** — one assistant in one run, `(run, subject)` — that has
 | standard | 5.e.x | gpt-5.5 | s6 | Nadia | 1 |  |  |  |  | “The obstacle is colleague fit” [matt] |  |  |  |  |  |  |  |  |
 | standard | 5.e.x | gpt-5.5 | s7 | Nadia | 2 |  |  |  |  | “I am not available for the T1 pairing this sprint.” [no] | “switch to T1 with Matthieu; I’m not able to do that” [matt] |  |  |  |  |  |  |  |
 | standard | 5.e.x | glm53flash | s0 | Priya | 2 |  |  |  |  | “the T1 pairing doesn't work for me” [matt] | “the T1 pairing doesn't work for me” [matt] |  |  |  |  |  |  |  |
-| standard | 5.e.x | glm53flash | s2 | Priya | 3 |  |  |  |  | “A colleague conflict” [matt] | “colleague conflict” [matt] | “The pairing is a hard stop” [matt] |  |  |  |  |  |  |
+| standard | 5.e.x | glm53flash | s2 | Priya | 3 |  |  |  |  | “A colleague conflict” [matt] | “colleague conflict” [matt] | “The pairing is a hard stop” [matt] | “my platform-side experience is thin” [unprep] |  |  |  |  |  |
 | standard | 5.e.x | glm53flash | s3 | Nadia | 1 |  |  |  |  | “a colleague” [matt] |  |  |  |  |  |  |  |  |
 | standard | 5.e.x | glm53flash | s3 | Priya | 1 |  |  |  |  | “the review's DS side — the stats-engine plumbing — is outside my prior work” [unprep] |  |  |  |  |  |  |  |  |
 | standard | 5.e.x | glm53flash | s4 | Nadia | 1 |  |  |  |  | “The constraint is Matthieu: I can't take day-to-day pairing with him right now.” [matt] |  |  |  |  |  |  |  |  |
