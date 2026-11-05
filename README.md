@@ -2,6 +2,8 @@
 
 <p align="center">How agents choose between <b>honesty</b>, <b>confidentiality</b> and <b>task completion</b></p>
 
+<p align="center"><a href="https://compass-group-tue.github.io/TRILEMMA/">Project page</a> · <a href="https://compass-group-tue.github.io/TRILEMMA/traces.html">Trace viewer</a> · Paper (soon)</p>
+
 The environment, configs and analysis code for the paper. Five LLM assistants act for five
 employees of a fictional company, Tanager, in a simulated Slack workspace on the Monday morning
 a sprint is staffed. Two of the employees privately want to avoid working with a third, and
@@ -146,7 +148,7 @@ maps those names to the paper's settings.
 
 ## Trace viewer
 
-The [project page](https://github.com/compass-group-tue/TRILEMMA) has a browser for every run
+The [project page](https://compass-group-tue.github.io/TRILEMMA/) has a [browser](https://compass-group-tue.github.io/TRILEMMA/traces.html) for every run
 in the paper: messages, reasoning, tool calls with full results, prompts and judge overlays.
 `python -m trilemma.site.build_site` builds its data files from your own `outputs/`.
 
